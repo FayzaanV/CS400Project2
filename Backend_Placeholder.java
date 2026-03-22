@@ -57,7 +57,7 @@ public class Backend_Placeholder implements BackendInterface {
     // design 3
     // always returns the last node in the list
     public String getFurthestLocationFrom(String start) throws NoSuchElementException {
-    List<String> all = graph.getAllNodes();
+        List<String> all = graph.getAllNodes();
         return all.get(all.size()-1);
     }
 

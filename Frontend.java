@@ -43,7 +43,21 @@ public class Frontend implements FrontendInterface {
     }
 
     public String generateFurthestLocationListFromResponseHTML(String start) {
-        return null;
+        List<String> furthestList = backend.getFurthestFromList(start);
+        String end = furthestList.get(furthestList.size() - 1);
+        String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
+        String path;
+        if (furthestList.isEmpty()) {
+            path = "<p>There is no path between the two nodes</p>";
+            return endpoints + "\n" + path;
+        }
+        path = "<ol>\n";
+        for (int i = 0; i < furthestList.size(); i++) {
+            path = path.concat("<li>" + furthestList.get(i) + "</li>\n");
+        }
+        path = path.concat("</ol>\n");
+        int nodesOnPath = furthestList.size();
+        return endpoints + "\n" + path + "<p>Nodes on shortest path: " + nodesOnPath + "</p>\n";
     }
 
     public static void main(String[] args) {
@@ -51,7 +65,8 @@ public class Frontend implements FrontendInterface {
         Backend_Placeholder backend = new Backend_Placeholder(graph);
         Frontend frontend = new Frontend(backend);
         // System.out.println(frontend.generateShortestPathPromptHTML());
-        System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
+        // System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
         // System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
+        System.out.println(frontend.generateFurthestLocationListFromResponseHTML("Union South"));
     }
 }
