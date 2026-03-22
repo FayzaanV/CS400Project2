@@ -28,7 +28,12 @@ public class Frontend implements FrontendInterface {
             path = path.concat("<li>" + shortestPath.get(i) + "</li>\n");
         }
         path = path.concat("</ol>\n");
-        return endpoints + "\n" + path;
+        double totalTime = 0.0;
+        List<Double> timeOnShortestPath = backend.findTimesOnShortestPath(start, end);
+        for(Double d : timeOnShortestPath) {
+            totalTime += d;
+        }
+        return endpoints + "\n" + path + "<p>Time to take shortest path: " + totalTime + "</p>\n";
     }
 
     public String generateFurthestLocationListFromPromptHTML() {
@@ -46,7 +51,7 @@ public class Frontend implements FrontendInterface {
         Backend_Placeholder backend = new Backend_Placeholder(graph);
         Frontend frontend = new Frontend(backend);
         // System.out.println(frontend.generateShortestPathPromptHTML());
-        // System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
-        System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
+        System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
+        // System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
     }
 }
