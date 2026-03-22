@@ -1,7 +1,11 @@
+import java.util.List;
+
 public class Frontend implements FrontendInterface {
     
-    public Frontend(BackendInterface backend) {
+    private BackendInterface backend;
 
+    public Frontend(BackendInterface backend) {
+        this.backend = backend;
     }
 
     public String generateShortestPathPromptHTML() {
@@ -12,7 +16,19 @@ public class Frontend implements FrontendInterface {
     }
 
     public String generateShortestPathResponseHTML(String start, String end) {
-        return null;
+        String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
+        List<String> shortestPath = backend.findLocationsOnShortestPath(start, end);
+        String path;
+        if (shortestPath.isEmpty()) {
+            path = "<p>There is no path between the two nodes</p>";
+            return endpoints + "\n" + path;
+        }
+        path = "<ol>\n";
+        for (int i = 0; i < shortestPath.size(); i++) {
+            path = path.concat("<li>" + shortestPath.get(i) + "</li>\n");
+        }
+        path = path.concat("</ol>\n");
+        return endpoints + "\n" + path;
     }
 
     public String generateFurthestLocationListFromPromptHTML() {
@@ -27,6 +43,7 @@ public class Frontend implements FrontendInterface {
         Graph_Placeholder graph = new Graph_Placeholder();
         Backend_Placeholder backend = new Backend_Placeholder(graph);
         Frontend frontend = new Frontend(backend);
-        System.out.println(frontend.generateShortestPathPromptHTML());
+        // System.out.println(frontend.generateShortestPathPromptHTML());
+        System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
     }
 }
