@@ -5,6 +5,7 @@ public class Frontend implements FrontendInterface {
     }
 
     public String generateShortestPathPromptHTML() {
+        String startInput = "<input type=>"
         return null;
     }
 
