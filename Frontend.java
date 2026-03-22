@@ -32,7 +32,9 @@ public class Frontend implements FrontendInterface {
     }
 
     public String generateFurthestLocationListFromPromptHTML() {
-        return null;
+        String textInput = "<input type = 'text' id = 'from' placeholder = 'Enter node here'>";
+        String button = "<button>Furthest Location List</button>";
+        return textInput + "\n" + button;
     }
 
     public String generateFurthestLocationListFromResponseHTML(String start) {
@@ -44,6 +46,7 @@ public class Frontend implements FrontendInterface {
         Backend_Placeholder backend = new Backend_Placeholder(graph);
         Frontend frontend = new Frontend(backend);
         // System.out.println(frontend.generateShortestPathPromptHTML());
-        System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
+        // System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
+        System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
     }
 }
