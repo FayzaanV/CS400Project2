@@ -63,8 +63,30 @@ public class FrontendTests {
         assertTrue(shortestPath.contains("6.0"), "generateShortestPathResponseHTML() does not correctly calculate time to take shortest path");
     }
 
+    /**
+     * This test checks the generateFurthestLocationListFromResponseHTML() method. It calls the method and then stores the output.
+     * It checks to make sure the output is not null or empty, then it checks to make sure the output contains the correct HTML tags
+     * and checks for the correct integer values to make sure the method calculated the amount of node correctly.
+     */
     @Test
     public void RoleTest3() {
+        // Create the necessary objects
+        Graph_Placeholder graph = new Graph_Placeholder();
+        Backend_Placeholder backend = new Backend_Placeholder(graph);
+        Frontend frontend = new Frontend(backend);
 
+        // Run the method
+        String furthest = frontend.generateFurthestLocationListFromResponseHTML("Union South");
+
+        // Check to make sure output is not empty or null
+        assertFalse(furthest == null, "generateFurthestLocationListFromResponseHTML() returned a null value");
+        assertFalse(furthest.isEmpty(), "generateFurthestLocationListFromResponseHTML() returned an empty value");
+
+        // Check to make sure output has necessary HTML tags in it and correctly calculates how much time the shortest path would take
+        assertTrue(furthest.contains("<p>"), "generateFurthestLocationListFromResponseHTML() does not contain any p tags");
+        assertTrue(furthest.contains("</p>"), "generateFurthestLocationListFromResponseHTML() does not contain any p tags");
+        assertTrue(furthest.contains("<ol>"), "generateFurthestLocationListFromResponseHTML() does not contain any ordered list tags");
+        assertTrue(furthest.contains("<li>"), "generateFurthestLocationListFromResponseHTML() does not contain any list item tags");
+        assertTrue(furthest.contains("3"), "generateFurthestLocationListFromResponseHTML() does not correctly calculate time to take shortest path");
     }
 }
