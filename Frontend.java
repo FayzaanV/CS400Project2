@@ -77,9 +77,9 @@ public class Frontend implements FrontendInterface {
     //     Graph_Placeholder graph = new Graph_Placeholder();
     //     Backend_Placeholder backend = new Backend_Placeholder(graph);
     //     Frontend frontend = new Frontend(backend);
-    //     System.out.println(frontend.generateShortestPathPromptHTML());
-    //     System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Computer Sciences and Statistics"));
-    //     System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
-    //     System.out.println(frontend.generateFurthestLocationListFromResponseHTML("Union South"));
+    //     // System.out.println(frontend.generateShortestPathPromptHTML());
+    //     System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Weeks Hall for Geological Sciences"));
+    //     // System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
+    //     // System.out.println(frontend.generateFurthestLocationListFromResponseHTML("Union South"));
     // }
 }
