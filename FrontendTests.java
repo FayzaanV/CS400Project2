@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FrontentTests {
+public class FrontendTests {
     
     /**
      * This test checks both the generateShortestPathPromptHTML() and generateFurthestLocationListFromPromptHTML() methods

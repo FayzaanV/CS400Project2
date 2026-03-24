@@ -73,13 +73,13 @@ public class Frontend implements FrontendInterface {
         return endpoints + "\n" + path + "<p>Nodes on shortest path: " + nodesOnPath + "</p>\n";
     }
 
-    // public static void main(String[] args) {
-    //     Graph_Placeholder graph = new Graph_Placeholder();
-    //     Backend_Placeholder backend = new Backend_Placeholder(graph);
-    //     Frontend frontend = new Frontend(backend);
-    //     // System.out.println(frontend.generateShortestPathPromptHTML());
-    //     System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Weeks Hall for Geological Sciences"));
-    //     // System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
-    //     // System.out.println(frontend.generateFurthestLocationListFromResponseHTML("Union South"));
-    // }
+    public static void main(String[] args) {
+        Graph_Placeholder graph = new Graph_Placeholder();
+        Backend_Placeholder backend = new Backend_Placeholder(graph);
+        Frontend frontend = new Frontend(backend);
+        // System.out.println(frontend.generateShortestPathPromptHTML());
+        // System.out.println(frontend.generateShortestPathResponseHTML("Union South", "Weeks Hall for Geological Sciences"));
+        // System.out.println(frontend.generateFurthestLocationListFromPromptHTML());
+        System.out.println(frontend.generateFurthestLocationListFromResponseHTML("Union South"));
+    }
 }
