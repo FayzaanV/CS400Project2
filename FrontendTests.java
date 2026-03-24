@@ -9,7 +9,7 @@ public class FrontendTests {
      * correct HTML tags to create the necessary inputs
      */
     @Test
-    public void RoleTest1() {
+    public void roleTest1() {
         // Create the necessary objects
         Graph_Placeholder graph = new Graph_Placeholder();
         Backend_Placeholder backend = new Backend_Placeholder(graph);
@@ -20,10 +20,10 @@ public class FrontendTests {
         String furthestFrom = frontend.generateFurthestLocationListFromPromptHTML();
 
         // Check to make sure both outputs aren't null and aren't empty
-        assertFalse(shortestPath == null, "The generateShortestPathPromptHTML() was null");
-        assertFalse(shortestPath.isEmpty(), "The generateShortestPathPromptHTML() was null");
-        assertFalse(furthestFrom == null, "The generateFurthestLocationListFromPromptHTML() was null");
-        assertFalse(furthestFrom.isEmpty(), "The generateFurthestLocationListFromPromptHTML() was null");
+        assertNotNull(shortestPath, "The generateShortestPathPromptHTML() was null");
+        assertFalse(shortestPath.isEmpty(), "The generateShortestPathPromptHTML() was empty");
+        assertNotNull(furthestFrom, "The generateFurthestLocationListFromPromptHTML() was null");
+        assertFalse(furthestFrom.isEmpty(), "The generateFurthestLocationListFromPromptHTML() was empty");
 
         // Make sure the generateShortestPathPromptHTML() creates text and button inputs
         assertTrue(shortestPath.contains("<input"), "generateShortestPathPromptHTML() has no input tags");
@@ -42,7 +42,7 @@ public class FrontendTests {
      * in the output.
      */
     @Test
-    public void RoleTest2() {
+    public void roleTest2() {
         // Create the necessary objects
         Graph_Placeholder graph = new Graph_Placeholder();
         Backend_Placeholder backend = new Backend_Placeholder(graph);
@@ -52,7 +52,7 @@ public class FrontendTests {
         String shortestPath = frontend.generateShortestPathResponseHTML("Union South", "Weeks Hall for Geological Sciences");
 
         // Check to make sure output is not empty or null
-        assertFalse(shortestPath == null, "generateShortestPathResponseHTML() returned a null value");
+        assertNotNull(shortestPath, "generateShortestPathResponseHTML() returned a null value");
         assertFalse(shortestPath.isEmpty(), "generateShortestPathResponseHTML() returned an empty value");
 
         // Check to make sure output has necessary HTML tags in it and correctly calculates how much time the shortest path would take
@@ -69,7 +69,7 @@ public class FrontendTests {
      * and checks for the correct integer values to make sure the method calculated the amount of node correctly.
      */
     @Test
-    public void RoleTest3() {
+    public void roleTest3() {
         // Create the necessary objects
         Graph_Placeholder graph = new Graph_Placeholder();
         Backend_Placeholder backend = new Backend_Placeholder(graph);
@@ -79,7 +79,7 @@ public class FrontendTests {
         String furthest = frontend.generateFurthestLocationListFromResponseHTML("Union South");
 
         // Check to make sure output is not empty or null
-        assertFalse(furthest == null, "generateFurthestLocationListFromResponseHTML() returned a null value");
+        assertNotNull(furthest, "generateFurthestLocationListFromResponseHTML() returned a null value");
         assertFalse(furthest.isEmpty(), "generateFurthestLocationListFromResponseHTML() returned an empty value");
 
         // Check to make sure output has necessary HTML tags in it and correctly calculates how much time the shortest path would take

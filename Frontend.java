@@ -32,7 +32,7 @@ public class Frontend implements FrontendInterface {
         // If there is a path, loop through the array and add each stop as a list item in the HTML tag
         path = "<ol>\n";
         for (int i = 0; i < shortestPath.size(); i++) {
-            path = path.concat("    <li>" + shortestPath.get(i) + "</li>\n");
+            path += "    <li>" + shortestPath.get(i) + "</li>\n";
         }
         path = path.concat("</ol>\n");
         // Calculate the total time from the backend
@@ -64,7 +64,7 @@ public class Frontend implements FrontendInterface {
         // Loop through the whole list and add each node as a list item
         path = "<ol>\n";
         for (int i = 0; i < furthestList.size(); i++) {
-            path = path.concat("    <li>" + furthestList.get(i) + "</li>\n");
+            path += "    <li>" + furthestList.get(i) + "</li>\n";
         }
         path = path.concat("</ol>\n");
         // The nodes on the path is just the size of the array
