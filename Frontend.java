@@ -35,19 +35,19 @@ public class Frontend implements FrontendInterface {
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
         // Get the shortest path from the start to the end from the backend
         List<String> shortestPath = backend.findLocationsOnShortestPath(start, end);
-        String path;
+        StringBuilder path = new StringBuilder();
         // If it returns an empty list, there is no path between the nodes
         // Add this issue as a p tag and return
         if (shortestPath.isEmpty()) {
-            path = "<p>There is no path between the two nodes</p>";
+            path.append("<p>There is no path between the two nodes</p>");
             return endpoints + "\n" + path;
         }
         // If there is a path, loop through the array and add each stop as a list item in the HTML tag
-        path = "<ol>\n";
+        path.append("<ol>\n");
         for (int i = 0; i < shortestPath.size(); i++) {
-            path += "    <li>" + shortestPath.get(i) + "</li>\n";
+            path.append("    <li>").append(shortestPath.get(i)).append("</li>\n");
         }
-        path = path.concat("</ol>\n");
+        path.append("</ol>\n");
         // Calculate the total time from the backend
         double totalTime = 0.0;
         List<Double> timeOnShortestPath = backend.findTimesOnShortestPath(start, end);
@@ -55,7 +55,7 @@ public class Frontend implements FrontendInterface {
             totalTime += d;
         }
         // Return each tag with line breaks in between
-        return endpoints + "\n" + path + "<p>Time to take shortest path: " + totalTime + "</p>\n";
+        return endpoints + "\n" + path.toString() + "<p>Time to take shortest path: " + totalTime + "</p>\n";
     }
 
     /**
@@ -83,17 +83,17 @@ public class Frontend implements FrontendInterface {
         String end = furthestList.get(furthestList.size() - 1);
         // Make a p tag for the start and end points
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
-        String path;
+        StringBuilder path = new StringBuilder();
         // Unlike in generateShortestPathResponseHTML(), there is guaranteed to be a path between the nodes
         // Loop through the whole list and add each node as a list item
-        path = "<ol>\n";
+        path.append("<ol>\n");
         for (int i = 0; i < furthestList.size(); i++) {
-            path += "    <li>" + furthestList.get(i) + "</li>\n";
+            path.append("    <li>").append(furthestList.get(i)).append("</li>\n");
         }
-        path = path.concat("</ol>\n");
+        path.append("</ol>\n");
         // The nodes on the path is just the size of the array
         int nodesOnPath = furthestList.size();
         // Return each tag with line breaks in between
-        return endpoints + "\n" + path + "<p>Nodes on shortest path: " + nodesOnPath + "</p>\n";
+        return endpoints + "\n" + path.toString() + "<p>Nodes on shortest path: " + nodesOnPath + "</p>\n";
     }
 }
