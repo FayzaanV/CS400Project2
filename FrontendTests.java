@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
+import java.util.List;
 
 public class FrontendTests {
     
@@ -113,7 +114,50 @@ public class FrontendTests {
         }
 
         String response = frontend.generateFurthestLocationListFromResponseHTML("New York");
-        assertTrue(response.contains("he starting node could not be found in the list"));
+        assertTrue(response.contains("The starting node could not be found in the list"));
         
+    }
+
+    @Test
+    public void IntegrationTest2() {
+        GraphADT<String,Double> graph = new DijkstraGraph<>();
+		BackendInterface backend = new Backend(graph);
+        try {
+            backend.loadGraphData("./europeanRail.dot");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		FrontendInterface frontend = new Frontend(backend);
+
+        String response = frontend.generateFurthestLocationListFromResponseHTML("Vienna");
+        List<String> backendResponse = backend.getFurthestFromList("Vienna");
+
+        assertTrue(response.contains("Vienna"));
+        assertTrue(response.contains(backendResponse.get(0)));
+        assertTrue(response.contains("Furthest location(s): " + backendResponse.size()));
+    }
+
+    @Test
+    public void IntegrationTest3() {
+        GraphADT<String,Double> graph = new DijkstraGraph<>();
+		BackendInterface backend = new Backend(graph);
+        try {
+            backend.loadGraphData("./europeanRail.dot");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		FrontendInterface frontend = new Frontend(backend);
+
+        try {
+            backend.findLocationsOnShortestPath("New York", "Los Angeles");
+            fail();
+        } catch (NoSuchElementException e) {
+
+        } catch (Exception e) {
+            fail();
+        }
+
+        String response = frontend.generateShortestPathResponseHTML("New York", "Los Angeles");
+        assertTrue(response.contains("Unable to calculate shortest path locations."));
     }
 }
