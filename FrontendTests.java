@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 public class FrontendTests {
     
     /**
@@ -88,5 +90,30 @@ public class FrontendTests {
         assertTrue(furthest.contains("<ol>"), "generateFurthestLocationListFromResponseHTML() does not contain any ordered list tags");
         assertTrue(furthest.contains("<li>"), "generateFurthestLocationListFromResponseHTML() does not contain any list item tags");
         assertTrue(furthest.contains("3"), "generateFurthestLocationListFromResponseHTML() does not correctly calculate time to take shortest path");
+    }
+
+    @Test
+    public void IntegrationTest1() {
+        GraphADT<String,Double> graph = new DijkstraGraph<>();
+		BackendInterface backend = new Backend(graph);
+        try {
+            backend.loadGraphData("./europeanRail.dot");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		FrontendInterface frontend = new Frontend(backend);
+
+        try {
+            backend.getFurthestFromList("New York");
+            fail();
+        } catch (NoSuchElementException e) {
+
+        } catch (Exception e) {
+            fail();
+        }
+
+        String response = frontend.generateFurthestLocationListFromResponseHTML("New York");
+        assertTrue(response.contains("he starting node could not be found in the list"));
+        
     }
 }
