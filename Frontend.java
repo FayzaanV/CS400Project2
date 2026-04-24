@@ -70,7 +70,7 @@ public class Frontend implements FrontendInterface {
             totalTime += d;
         }
         // Return each tag with line breaks in between
-        return endpoints + "\n" + path.toString() + "<p>Time to take shortest path: " + totalTime + "</p>\n";
+        return endpoints + "\n" + path.toString() + "<p>Time to take shortest path: " + totalTime + " minutes</p>\n";
     }
 
     /**
@@ -119,6 +119,6 @@ public class Frontend implements FrontendInterface {
         // The nodes on the path is just the size of the array
         int nodesOnPath = furthestList.size();
         // Return each tag with line breaks in between
-        return endpoints + "\n" + path.toString() + "<p>Nodes on shortest path: " + nodesOnPath + "</p>\n";
+        return endpoints + "\n" + path.toString() + "<p>Furthest location(s): " + nodesOnPath + "</p>\n";
     }
 }
