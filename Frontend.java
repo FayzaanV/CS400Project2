@@ -8,6 +8,11 @@ public class Frontend implements FrontendInterface {
         this.backend = backend;
     }
 
+    /**
+     * Returns an HTML fragment that includes two text inputs for the user to enter two locations and a button for the user to 
+     * calculate the shortest path between these two locations
+     * @return the HTML fragment
+     */
     public String generateShortestPathPromptHTML() {
         // Write HTML tags as Strings
         String startInput = "<input type='text' id='start' placeholder='Enter start location'>";
@@ -17,6 +22,14 @@ public class Frontend implements FrontendInterface {
         return startInput + "\n" + endInput + "\n" + button + "\n";
     }
 
+    /**
+     * Returns an HTML fragment that includes a p-tag with the start and endpoints, an ordered list with every node along the path
+     * from the start to the end point, and a p-tag that shows the total time to travel this path. If no path can be found, then
+     * state that there is no path
+     * @param start is the node at the start of the path
+     * @param end is the node at the end of the path that we will calculate
+     * @return the HTML fragment
+     */
     public String generateShortestPathResponseHTML(String start, String end) {
         // Create a p tag to hold the start and end points
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
@@ -45,6 +58,11 @@ public class Frontend implements FrontendInterface {
         return endpoints + "\n" + path + "<p>Time to take shortest path: " + totalTime + "</p>\n";
     }
 
+    /**
+     * Returns an HTML fragment that includes a text inputs for the user to enter a locations and a button for the user to 
+     * calculate the furthest location from that node.
+     * @return the HTML fragment
+     */
     public String generateFurthestLocationListFromPromptHTML() {
         // Write the HTML tags as Strings
         String textInput = "<input type='text' id = 'from' placeholder = 'Enter node here'>";
@@ -53,6 +71,12 @@ public class Frontend implements FrontendInterface {
         return textInput + "\n" + button;
     }
 
+    /**
+     * Returns an HTML fragment that includes a p-tag with the start and endpoints, an ordered list with every node along the path
+     * from the start to the end point, and a p-tag that shows the total number of nodes along this path
+     * @param start is the node at the start of the path. We will find whatever node is furthest away from this one
+     * @return the HTML fragment
+     */
     public String generateFurthestLocationListFromResponseHTML(String start) {
         // Get the furthestList and the furthest node from the backend
         List<String> furthestList = backend.getFurthestFromList(start);
