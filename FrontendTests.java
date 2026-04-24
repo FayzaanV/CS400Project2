@@ -160,4 +160,28 @@ public class FrontendTests {
         String response = frontend.generateShortestPathResponseHTML("New York", "Los Angeles");
         assertTrue(response.contains("Unable to calculate shortest path locations."));
     }
+
+    @Test
+    public void IntegrationTest4() {
+        GraphADT<String,Double> graph = new DijkstraGraph<>();
+		BackendInterface backend = new Backend(graph);
+        try {
+            backend.loadGraphData("./europeanRail.dot");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+		FrontendInterface frontend = new Frontend(backend);
+
+        String response = frontend.generateShortestPathResponseHTML("Stuttgart", "Munich");
+        List<String> backendResponse = backend.findLocationsOnShortestPath("Stuttgart", "Munich");
+        List<Double> backendTimes = backend.findTimesOnShortestPath("Stuttgart", "Munich");
+        double totalTime = 0.0;
+        for (Double d : backendTimes) {
+            totalTime += d;
+        }
+
+        assertTrue(response.contains(backendResponse.get(0)));
+        assertTrue(response.contains(backendResponse.get(backendResponse.size() - 1)));
+        assertTrue(response.contains("Time to take shortest path: " + totalTime + " minutes"));
+    }
 }
