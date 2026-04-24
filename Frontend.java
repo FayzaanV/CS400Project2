@@ -14,6 +14,7 @@ public class Frontend implements FrontendInterface {
      * calculate the shortest path between these two locations
      * @return the HTML fragment
      */
+    @Override
     public String generateShortestPathPromptHTML() {
         // Write HTML tags as Strings
         String startInput = "<input type='text' id='start' placeholder='Enter start location'>";
@@ -31,6 +32,7 @@ public class Frontend implements FrontendInterface {
      * @param end is the node at the end of the path that we will calculate
      * @return the HTML fragment
      */
+    @Override
     public String generateShortestPathResponseHTML(String start, String end) {
         // Create a p tag to hold the start and end points
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
@@ -76,6 +78,7 @@ public class Frontend implements FrontendInterface {
      * calculate the furthest location from that node.
      * @return the HTML fragment
      */
+    @Override
     public String generateFurthestLocationListFromPromptHTML() {
         // Write the HTML tags as Strings
         String textInput = "<input type='text' id = 'from' placeholder = 'Enter node here'>";
@@ -90,6 +93,7 @@ public class Frontend implements FrontendInterface {
      * @param start is the node at the start of the path. We will find whatever node is furthest away from this one
      * @return the HTML fragment
      */
+    @Override
     public String generateFurthestLocationListFromResponseHTML(String start) {
         // Get the furthestList and the furthest node from the backend
         // If any errors are thrown, an error message with that exception's message in a p-tag will be returned
