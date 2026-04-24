@@ -1,7 +1,8 @@
 import java.util.List;
+ import java.util.NoSuchElementException;
 
 public class Frontend implements FrontendInterface {
-    
+
     private BackendInterface backend;
 
     public Frontend(BackendInterface backend) {
@@ -34,7 +35,13 @@ public class Frontend implements FrontendInterface {
         // Create a p tag to hold the start and end points
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
         // Get the shortest path from the start to the end from the backend
-        List<String> shortestPath = backend.findLocationsOnShortestPath(start, end);
+        // If any errors are thrown, an error message with that exception's message in a p-tag will be returned.
+        List<String> shortestPath;
+        try {
+            shortestPath = backend.findLocationsOnShortestPath(start, end);
+        } catch (Exception e) {
+            return "<p>Unable to calculate shortest path locations. An exception was thrown: " + e.getMessage() + "</p>";
+        }
         StringBuilder path = new StringBuilder();
         // If it returns an empty list, there is no path between the nodes
         // Add this issue as a p tag and return
@@ -49,8 +56,14 @@ public class Frontend implements FrontendInterface {
         }
         path.append("</ol>\n");
         // Calculate the total time from the backend
+        // If any errors are thrown, an error message with that exception's message in a p-tag will be returned.
         double totalTime = 0.0;
-        List<Double> timeOnShortestPath = backend.findTimesOnShortestPath(start, end);
+        List<Double> timeOnShortestPath;
+        try {
+            timeOnShortestPath = backend.findTimesOnShortestPath(start, end);
+        } catch (Exception e) {
+            return "<p>Unable to calculate shortest path time. An exception was thrown: " + e.getMessage() + "</p>";
+        }
         for(Double d : timeOnShortestPath) {
             totalTime += d;
         }
@@ -79,7 +92,15 @@ public class Frontend implements FrontendInterface {
      */
     public String generateFurthestLocationListFromResponseHTML(String start) {
         // Get the furthestList and the furthest node from the backend
-        List<String> furthestList = backend.getFurthestFromList(start);
+        // If any errors are thrown, an error message with that exception's message in a p-tag will be returned
+        List<String> furthestList;
+        try {
+            furthestList = backend.getFurthestFromList(start);
+        } catch (NoSuchElementException e) {
+            return "<p>The starting node could not be found in the list</p>";
+        } catch (Exception e) {
+            return "<p>Unable to calculate furthest from location. An exception was thrown: " + e.getMessage() + "</p>";
+        }
         String end = furthestList.get(furthestList.size() - 1);
         // Make a p tag for the start and end points
         String endpoints = "<p>Start: " + start + ", End: " + end + "</p>";
